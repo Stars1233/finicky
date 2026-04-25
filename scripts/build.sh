@@ -85,14 +85,14 @@ if [ "${BUILD_UNIVERSAL:-0}" = "1" ]; then
 
     # Copy static assets into universal app
     cp packages/config-api/dist/finicky.d.ts apps/finicky/build/${APP_NAME}/Contents/Resources/finicky.d.ts
-    cp -r apps/finicky/assets/* apps/finicky/build/${APP_NAME}/Contents/
+    rsync -a --exclude='menu.iconset' apps/finicky/assets/ apps/finicky/build/${APP_NAME}/Contents/
 elif [ -n "$BUILD_TARGET_ARCH" ]; then
     # Single-arch CI build (legacy/fallback)
     APP_NAME="Finicky-${BUILD_TARGET_ARCH}.app"
     build_arch ${BUILD_TARGET_ARCH}
 
     cp packages/config-api/dist/finicky.d.ts apps/finicky/build/${APP_NAME}/Contents/Resources/finicky.d.ts
-    cp -r apps/finicky/assets/* apps/finicky/build/${APP_NAME}/Contents/
+    rsync -a --exclude='menu.iconset' apps/finicky/assets/ apps/finicky/build/${APP_NAME}/Contents/
 else
     # Local build — native arch only
     APP_NAME="Finicky.app"
@@ -112,7 +112,7 @@ else
     cd ../../
 
     cp packages/config-api/dist/finicky.d.ts apps/finicky/build/${APP_NAME}/Contents/Resources/finicky.d.ts
-    cp -r apps/finicky/assets/* apps/finicky/build/${APP_NAME}/Contents/
+    rsync -a --exclude='menu.iconset' apps/finicky/assets/ apps/finicky/build/${APP_NAME}/Contents/
 
     # Replace existing app
     rm -rf /Applications/Finicky.app
