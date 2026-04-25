@@ -98,6 +98,12 @@ jobs:
           # Clean up
           rm certificate.p12
 
+      - name: Pre-sign bundle
+        run: |
+          codesign --deep --force --options runtime \
+            --sign "Developer ID Application: John Sterling" \
+            ./apps/finicky/build/Finicky.app
+
       - name: Install gon
         run: |
           brew install Bearer/tap/gon
