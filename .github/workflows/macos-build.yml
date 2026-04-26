@@ -102,7 +102,7 @@ jobs:
         run: |
           codesign --deep --force --options runtime \
             --sign "Developer ID Application: John Sterling" \
-            ./apps/finicky/build/Finicky.app
+            ./universal/Finicky.app
 
       - name: Install gon
         run: |
